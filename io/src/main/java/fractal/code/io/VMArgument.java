@@ -24,7 +24,15 @@ public class VMArgument {
     }
 
     public String get() {
-        return keys.stream().map(System::getProperty).filter(this::isNotEmpty).findFirst().orElse(defaultValue);
+        return keys.stream()
+                .map(System::getProperty)
+                .filter(this::isNotEmpty)
+                .findFirst()
+                .orElse(defaultValue);
+    }
+
+    public void publish() {
+        System.setProperty(keys.get(0), get());
     }
 
     private boolean isNotEmpty(String s) {
